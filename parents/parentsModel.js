@@ -2,7 +2,7 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
   getAll, 
-  // insert,
+  insert,
   // remove,
   getById,
 }
@@ -15,8 +15,7 @@ function getById(id) {
   return db('parents').where({id});
 }
 
-
-// function insert(parent) {
-//   const [id] = db('parents').insert(parent);
-//   return db('parents').where({id}).first;
-// }
+async function insert(parent) {
+  const [id] = await db('parents').insert(parent);
+  return db('parents').where({id}).first();
+}
