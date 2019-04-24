@@ -21,4 +21,18 @@ server.get('/parents', async (req, res) => {
   }
 });
 
+server.get('/parents/:id', async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const parent = await parents.getById(id);
+    if (parent > 0){
+      res.status(200).json(parent);
+    } else {
+      res.status(404).json({message: "parent with specified id not found"});
+    }
+  } catch (error) {
+    res.status(500).json({error: error});
+  }
+});
+
 module.exports = server;
