@@ -12,40 +12,13 @@ server.get('/', async (req, res) => {
   });
 });
 
-// server.get('/parents', async (req, res) => {
-//   const allFriends = await friends.getAll();
-//   res.status(200).json(allFriends);
-// });
-
-// server.post('/parents', async (req, res) => {
-//   try {
-//     const newFriend = req.body;
-//     const friend = await friends.insert(newFriend);
-//     res.status(201).json({
-//       newFriend: friend
-//     })
-//   } catch (err) {
-//     res.status(500).json({
-//       err: 'Friend could not be added.'
-//     })
-//   }
-// })
-
-// server.delete('/parents/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const friend = await friends.remove(id);
-//     if (friend > 0) {
-//       res.status(204).json({ friend })
-//     } else {
-//       res.status(404).json({message: 'Friend with that ID does not exist.'})
-//     }
-//   } catch (error) {
-//     res.status(500).json({
-//       error: "The friend could not be removed"
-//     })
-//   }
-// })
-
+server.get('/parents', async (req, res) => {
+  try {
+    const allParents = await parents.getAll();
+    res.status(200).json(allParents);
+  } catch (error) {
+    res.status(500).json({error: error});
+  }
+});
 
 module.exports = server;
