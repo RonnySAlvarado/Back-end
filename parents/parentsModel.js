@@ -12,7 +12,7 @@ function getAll() {
 }
 
 function getById(id) {
-  return db('parents').where({id});
+  return db('parents').where({id}).first();
 }
 
 async function insert(parent) {
