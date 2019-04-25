@@ -4,17 +4,16 @@ const cors = require('cors');
 
 const server = express();
 
-// const authRouter = require('../auth/authRouter');
+const authRouter = require('../auth/authRouter');
 const parentsRouter = require('../parents/parentsRouter');
 
 server.use(express.json());
-
 
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
-// server.use('/api/', authRouter);
+server.use('/api/', authRouter);
 server.use('/api/parents', parentsRouter);
 
 server.get('/', async (req, res) => {

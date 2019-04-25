@@ -1,11 +1,9 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-
-const parents = require('./parentsModel');
+const Parents = require('./parentsModel');
 
 router.get('/', async (req, res) => {
   try {
-    const allParents = await parents.getAll();
+    const allParents = await Parents.getAll();
     res.status(200).json(allParents);
   } catch (error) {
     res.status(500).json({error: error});
@@ -15,7 +13,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const { id } = req.params; 
-    const parent = await parents.getById(id);
+    const parent = await Parents.getById(id);
     if (parent > 0){
       res.status(200).json(parent);
     } else {
@@ -29,10 +27,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newParent = req.body;
-      const parent = await parents.insert(newParent);
-      res.status(201).json({
-        newParent: parent
-      })
+    const parent = await Parents.insert(newParent);
+    res.status(201).json({
+      newParent: parent
+    })
   } catch (err) {
     res.status(500).json({
       err: 'Parent could not be added.'
