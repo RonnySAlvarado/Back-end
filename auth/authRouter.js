@@ -3,9 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Parents = require('../parents/parentsModel');
-const jwtSecret  = process.env.JWT_SECRET;
-
-
+const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   const parent = req.body;
@@ -17,7 +15,7 @@ router.post('/register', async (req, res) => {
   try {
     const token = await generateToken(parent);
     console.log(token)
-    res.status(201).json({message: `Welcome!`, token});
+    res.status(201).json({message: `Welcome, ${parent.username}!`, token});
   } catch (err) {
     res.status(500).json({error: err})
   }
