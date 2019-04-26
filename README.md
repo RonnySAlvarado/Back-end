@@ -6,7 +6,10 @@ To run locally: use `npm start`
 The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokuapp.com/)
 
 ### Endpoints
-To register a new user: `/api/register`
+
+
+#### Register a new user
+`POST` to `/api/register`
 The request body requires a username and password: 
 ```
 {
@@ -14,9 +17,11 @@ The request body requires a username and password:
   password: 'pass123'
 }
 ```
+The response will return the user's id and generate a token
 
 
-To login an existing user: `/api/login`
+#### Login using an existing user
+`POST` to `/api/login`
 The request body requires a username and password:
 ```
 {
@@ -24,4 +29,18 @@ The request body requires a username and password:
   password: 'pass123'
 }
 ``` 
+The response will return the user's id and generate a token
 
+
+#### View parent information
+`GET` to `/api/parents/:id`
+
+
+#### Add a new child 
+`POST` to `/api/parents/:id/children`
+The request body requires a name and parentId:
+{
+    "name": "jacob",
+    "parentId": 16
+}
+The response will return the child's id, name, and parentId.
