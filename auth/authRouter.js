@@ -5,36 +5,36 @@ const jwt = require('jsonwebtoken');
 const Parents = require('../parents/parentsModel');
 const jwtSecret = process.env.JWT_SECRET;
 
-// router.post('/register', async (req, res) => {
-//   const parent = req.body;
-//   const hash = bcrypt.hashSync(parent.password, 10);
-//   parent.password = hash;
-//   Parents.insert(parent)
-//   try {
-//     const token = await generateToken(parent);
-//     console.log(token)
-//     res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
-//   } catch (err) {
-//     res.status(500).json({error: err})
-//   }
-
-// })
 router.post('/register', async (req, res) => {
-  let parent = req.body;
+  const parent = req.body;
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
+  Parents.insert(parent)
   try {
-    parent = await db('parents').insert(parent)
-    console.log(parent)
     const token = await generateToken(parent);
-    // const { id, username } = parent
-    console.log('token', token)
-    res.status(201).json({message: `Welcome, ${parent.username}!`, token});
+    console.log(token)
+    res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
   } catch (err) {
     res.status(500).json({error: err})
   }
 
 })
+// router.post('/register', async (req, res) => {
+//   let parent = req.body;
+//   const hash = bcrypt.hashSync(parent.password, 10);
+//   parent.password = hash;
+//   try {
+//     parent = await db('parents').insert(parent)
+//     console.log(parent)
+//     const token = await generateToken(parent);
+//     // const { id, username } = parent
+//     console.log('token', token)
+//     res.status(201).json({message: `Welcome, ${parent.username}!`, token});
+//   } catch (err) {
+//     res.status(500).json({error: err})
+//   }
+
+// })
 
 
 router.post('/login', async (req, res) => {
