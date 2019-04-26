@@ -23,10 +23,10 @@ router.post('/register', async (req, res) => {
   const parent = req.body;
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
-  db('parents').insert(parent)
   try {
+    db('parents').insert(parent)
     const token = await generateToken(parent);
-    console.log(token)
+    console.log('token', token)
     res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
   } catch (err) {
     res.status(500).json({error: err})
