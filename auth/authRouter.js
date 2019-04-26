@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
-    parent = await db('parents').insert(parent)
+    parent = await Parents.insert(parent)
     console.log(parent)
     const token = await generateToken(parent);
     console.log(token)
