@@ -5,13 +5,25 @@ const jwt = require('jsonwebtoken');
 const Parents = require('../parents/parentsModel');
 const jwtSecret = process.env.JWT_SECRET;
 
+// router.post('/register', async (req, res) => {
+//   const parent = req.body;
+//   const hash = bcrypt.hashSync(parent.password, 10);
+//   parent.password = hash;
+//   Parents.insert(parent)
+//   try {
+//     const token = await generateToken(parent);
+//     console.log(token)
+//     res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
+//   } catch (err) {
+//     res.status(500).json({error: err})
+//   }
+
+// })
 router.post('/register', async (req, res) => {
   const parent = req.body;
   const hash = bcrypt.hashSync(parent.password, 10);
-  console.log(hash)
   parent.password = hash;
-  console.log(parent.password)
-  Parents.insert(parent)
+  db('parents').insert(parent)
   try {
     const token = await generateToken(parent);
     console.log(token)
@@ -22,10 +34,11 @@ router.post('/register', async (req, res) => {
 
 })
 
+
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;    
-    const parent = await Parents.getAll().where({ username }).first();
+    const parent = await db('parents').getAll().where({ username }).first();
     console.log(parent, bcrypt.compareSync(password, parent.password))
     console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {
