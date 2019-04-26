@@ -41,8 +41,8 @@ The response will return the user's id and generate a token
 The request body requires a name and parentId:
 ```
 {
-    "name": "jacob",
-    "parentId": 16
+  "name": "jacob",
+  "parentId": 16
 }
 ```
 The response will return the child's id, name, and parentId.

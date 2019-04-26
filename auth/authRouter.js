@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
   try {
     const token = await generateToken(parent);
     console.log(token)
-    res.status(201).json({message: `Welcome, ${parent.username}!`, token});
+    res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
   } catch (err) {
     res.status(500).json({error: err})
   }
@@ -30,7 +30,8 @@ router.post('/login', async (req, res) => {
     console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {
       const token = generateToken(parent);
-      res.status(200).json({message: `Welcome back, ${parent.username}! Have a token`, token})
+      const {id, username} = parent;
+      res.status(200).json({message: `Welcome back, ${parent.username}! Have a token`, id, username, token})
     } else {
       res.status(401).json({ message: 'username/password not valid'})
     }
