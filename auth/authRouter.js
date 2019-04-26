@@ -6,13 +6,15 @@ const Parents = require('../parents/parentsModel');
 const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
-  const parent = req.body;
+  let parent = req.body;
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
-  Parents.insert(parent)
   try {
+    parent = await Parents.insert(parent)
+    console.log(parent)
     const token = await generateToken(parent);
     console.log(token)
+    const {id, username} = parent;
     res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
   } catch (err) {
     res.status(500).json({error: err})
