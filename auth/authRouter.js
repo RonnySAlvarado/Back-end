@@ -25,6 +25,7 @@ router.post('/register', async (req, res) => {
   parent.password = hash;
   try {
     parent = await db('parents').insert(parent)
+    console.log(parent)
     const token = await generateToken(parent);
     // const { id, username } = parent
     console.log('token', token)
