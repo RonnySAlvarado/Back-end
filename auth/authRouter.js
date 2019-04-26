@@ -12,10 +12,11 @@ router.post('/register', async (req, res) => {
   try {
     parent = await Parents.insert(parent)
     console.log(parent)
-    const token = await generateToken(parent);
-    console.log(token)
+    // const token = await generateToken(parent);
+    // console.log(token)
     const {id, username} = parent;
-    res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
+    // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
+    res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
   } catch (err) {
     res.status(500).json({error: err})
   }
