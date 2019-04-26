@@ -7,7 +7,21 @@ The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokua
 
 ### Endpoints
 To register a new user: `/api/register`
+The request body requires a username and password: 
+```
+{
+  username: 'bob', 
+  password: 'pass123'
+}
+```
+
 
 To login an existing user: `/api/login`
+The request body requires a username and password:
+```
+{
+  username: 'bob', 
+  password: 'pass123'
+}
+``` 
 
-Registering and logging in will require a username and password.
