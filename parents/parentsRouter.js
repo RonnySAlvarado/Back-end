@@ -30,19 +30,19 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
-  try {
-    const newParent = req.body;
-    const parent = await Parents.insert(newParent);
-    res.status(201).json({
-      newParent: parent
-    })
-  } catch (err) {
-    res.status(500).json({
-      err: 'Parent could not be added.'
-    })
-  }
-})
+// router.post('/', async (req, res) => {
+//   try {
+//     const newParent = req.body;
+//     const parent = await Parents.insert(newParent);
+//     res.status(201).json({
+//       newParent: parent
+//     })
+//   } catch (err) {
+//     res.status(500).json({
+//       err: 'Parent could not be added.'
+//     })
+//   }
+// })
 
 // get all parent's children
 router.get('/:id/children', async (req, res) => {
