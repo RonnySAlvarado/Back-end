@@ -4,7 +4,7 @@ const Children = require('../children/childrenModel');
 
 const restricted = require('../auth/restricted-middleware');
 
-router.get('/', restricted, async (req, res) => {
+router.get('/',  async (req, res) => {
   try {
     const allParents = await Parents.getAll();
     res.status(200).json(allParents);
@@ -13,7 +13,7 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
-router.get('/:id', restricted,  async (req, res) => {
+router.get('/:id',   async (req, res) => {
   try {
     const { id } = req.params; 
     console.log('params', req.params)
@@ -45,7 +45,7 @@ router.get('/:id', restricted,  async (req, res) => {
 // })
 
 // get all parent's children
-router.get('/:id/children', restricted,  async (req, res) => {
+router.get('/:id/children',   async (req, res) => {
   try {
     const { id } = req.params; 
     const allChildren = await Children.getByParent(id);
@@ -56,7 +56,7 @@ router.get('/:id/children', restricted,  async (req, res) => {
 });
 
 // add new children
-router.post('/:id/children', restricted,  async (req, res) => {
+router.post('/:id/children',   async (req, res) => {
   try {
     const newChild = req.body;
     const child = await Children.insert(newChild);
