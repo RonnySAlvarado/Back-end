@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const Parents = require('./parentsModel');
+const restricted = require('../auth/restricted-middleware');
 
-router.get('/', async (req, res) => {
+router.get('/', restricted, async (req, res) => {
   try {
     const allParents = await Parents.getAll();
     res.status(200).json(allParents);
@@ -10,7 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', restricted, async (req, res) => {
   try {
     const { id } = req.params; 
     const parent = await Parents.getById(id);
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', restricted, async (req, res) => {
   try {
     const newParent = req.body;
     const parent = await Parents.insert(newParent);
