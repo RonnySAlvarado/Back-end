@@ -70,7 +70,7 @@ function generateToken(parent) {
   const options = {
     expiresIn: '1d'
   }
-  console.log(jwt.sign(payload, jwtSecret, options))
+  console.log('payload', payload, 'options', options, )
   return jwt.sign(payload, jwtSecret, options);
 }
 
