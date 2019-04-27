@@ -2,24 +2,26 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const db = require('../data/dbConfig.js');
 const Parents = require('../parents/parentsModel');
+
 const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   let parent = req.body;
+  console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
     parent.id = await Parents.insert(parent);
+    console.log(parent.id)
     const token = await generateToken(parent);
-    
-    console.log(parent, token)
+    console.log(token)
     res.status(201).json({parentId: parent.id, token});
     // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
   } catch (err) {
-    res.status(500).json({error: "an error occurred when adding new user"})
+    res.status(500).json({error: "an error occurred when adding new user", err})
   }
-
 })
 // router.post('/register', async (req, res) => {
 //   let parent = req.body;
@@ -59,7 +61,6 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
-  console.log(parent)
   const payload = {
     subject: parent.id,
     username: parent.username
