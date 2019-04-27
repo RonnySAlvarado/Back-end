@@ -18,7 +18,8 @@ function getById(id) {
 async function insert(parent) {
   // const [id] = await db('parents').insert(parent);
   // return db('parents').where({id}).first();
-  return await db('parents')
-    .returning('id')
-    .insert(parent);
+  const id = await db('parents')
+  .returning('id')
+  .insert(parent);
+  return id[0];
 }
