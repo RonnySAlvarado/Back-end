@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
     console.log(parent.id)
     const token = await generateToken(parent);
     console.log(token)
-    res.status(201).json({parentId: parent.id, token});
+    res.status(201).json(parent);
     // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
   } catch (err) {
     res.status(500).json({error: "an error occurred when adding new user", err})
