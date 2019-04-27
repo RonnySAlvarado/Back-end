@@ -63,14 +63,14 @@ router.post('/login', async (req, res) => {
 function generateToken(parent) {
   console.log('generateToken parent', parent)
   const payload = {
-    subject: parent.id,
+    // subject: parent.id,
     username: parent.username
   }
 
   const options = {
     expiresIn: '1d'
   }
-  console.log('payload', payload, 'options', options, )
+  console.log('payload', payload, 'options', options)
   return jwt.sign(payload, jwtSecret, options);
 }
 
