@@ -61,6 +61,7 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
+  console.log('generateToken parent', parent)
   const payload = {
     subject: parent.id,
     username: parent.username
