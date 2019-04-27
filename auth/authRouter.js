@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
     
     // const {id, username} = parent;
     console.log('parent after token', parent)
-    res.status(201).json({parent});
+    res.status(201).json(parent);
     // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
   } catch (err) {
     res.status(500).json({error: err})
