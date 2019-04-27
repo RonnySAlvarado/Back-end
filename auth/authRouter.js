@@ -11,12 +11,12 @@ router.post('/register', async (req, res) => {
   parent.password = hash;
   try {
     parent = await Parents.insert(parent);
-    console.log(parent)
+    console.log('parent', parent)
     const token = await generateToken(parent);
     
-    const {id, username} = parent;
-    console.log(parent)
-    res.status(201).json({message: `Welcome, ${parent.username}!`, id, username, token});
+    // const {id, username} = parent;
+    console.log('parent after token', parent)
+    res.status(201).json({parent});
     // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
   } catch (err) {
     res.status(500).json({error: err})
