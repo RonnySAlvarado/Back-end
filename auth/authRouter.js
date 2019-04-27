@@ -12,6 +12,7 @@ router.post('/register', async (req, res) => {
   try {
     parent.id = await Parents.insert(parent);
     const token = await generateToken(parent);
+    
     console.log(parent, token)
     res.status(201).json({parentId: parent.id, token});
     // res.status(201).json({message: `Welcome, ${parent.username}!`, id, username});
@@ -58,6 +59,7 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
+  console.log(parent)
   const payload = {
     subject: parent.id,
     username: parent.username
