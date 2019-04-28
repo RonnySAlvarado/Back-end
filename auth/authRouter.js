@@ -9,17 +9,21 @@ const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   let parent = req.body;
+  console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
-    parent = await db('parents').insert(parent)
-    console.log(parent)
+    const id = await Parents.insert(parent);
+    // id = id[0];
+    // parent = await Parents.getById(parent.id)
+
+    console.log('parent', parent)
     const token = await generateToken(parent);
     // const { id, username } = parent
     console.log('token', token)
     res.status(201).json({message: `Welcome, ${parent.username}!`, token});
   } catch (err) {
-    res.status(500).json({error: err})
+    res.status(500).json({error: 'unable to add new user', err})
   }
 
 })
@@ -28,7 +32,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;    
-    const parent = await db('parents').getAll().where({ username }).first();
+    const parent = await Parents.getAll().where({ username }).first();
     console.log(parent, bcrypt.compareSync(password, parent.password))
     console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {

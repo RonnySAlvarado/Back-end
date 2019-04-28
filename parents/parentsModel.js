@@ -22,8 +22,7 @@ async function insert(parent) {
   // // .returning('id')
   // .insert(parent, ['id']);
   // return id[0];
-  const [id] = await db('notes').insert(parent);
   return db('parents')
-    .where({ id })
-    .first();
+    .returning('id')
+    .insert(parent);
 }
