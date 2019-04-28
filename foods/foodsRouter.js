@@ -11,4 +11,16 @@ router.get('/', restricted, async (req, res) => {
   }
 });
 
+router.post('/', restricted, async (req, res) => {
+    try {
+      const newFood = req.body;
+      const food = await Foods.insert(newFood);
+      res.status(201).json({ newfood: food })
+    } catch (err) {
+      res.status(500).json({
+        err: 'food could not be added.'
+      })
+    }
+  })
+
 module.exports = router;
