@@ -15,10 +15,12 @@ router.post('/register', (req, res) => {
     .insert(parent)
     .then(ids => {
       const id = ids[0];
+      console.log(id)
       db('parents')
         .where({ id })
         .then(user => {
           const token = generateToken(user);
+          console.log(token)
           res.status(201).json({ username: user[0].username, token });
         })
         .catch(err =>
