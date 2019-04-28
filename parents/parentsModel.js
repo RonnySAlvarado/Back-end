@@ -12,10 +12,17 @@ function getAll() {
 }
 
 function getById(id) {
-  return db('parents').where({id});
+  return db('parents').where({id}).first();
 }
 
 async function insert(parent) {
-  const [id] = await db('parents').insert(parent);
-  return db('parents').where({id}).first();
+  // const [id] = await db('parents').insert(parent);
+  // return db('parents').where({id}).first();
+  // const id = await db('parents')
+  // // .returning('id')
+  // .insert(parent, ['id']);
+  // return id[0];
+  return db('parents')
+    .returning('id')
+    .insert(parent);
 }

@@ -2,25 +2,31 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const db = require('../data/dbConfig.js');
 const Parents = require('../parents/parentsModel');
+
 const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
-  const parent = req.body;
+  let parent = req.body;
+  console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
-  console.log(hash)
   parent.password = hash;
-  console.log(parent.password)
-  Parents.insert(parent)
   try {
+    const id = await Parents.insert(parent);
+    // id = id[0];
+    console.log('id', id[0])
+    console.log('parent', parent)
     const token = await generateToken(parent);
-    console.log(token)
+    // const { id, username } = parent
+    console.log('token', token)
     res.status(201).json({message: `Welcome, ${parent.username}!`, token});
   } catch (err) {
-    res.status(500).json({error: err})
+    res.status(500).json({error: 'unable to add new user', err})
   }
 
 })
+
 
 router.post('/login', async (req, res) => {
   try {
@@ -30,7 +36,8 @@ router.post('/login', async (req, res) => {
     console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {
       const token = generateToken(parent);
-      res.status(200).json({message: `Welcome back, ${parent.username}! Have a token`, token})
+      const {id, username} = parent;
+      res.status(200).json({message: `Welcome back, ${parent.username}! Have a token`, id, username, token})
     } else {
       res.status(401).json({ message: 'username/password not valid'})
     }
@@ -41,15 +48,16 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
+  console.log('generateToken parent', parent)
   const payload = {
-    subject: parent.id,
+    // subject: parent.id,
     username: parent.username
   }
 
   const options = {
     expiresIn: '1d'
   }
-
+  console.log('payload', payload, 'options', options)
   return jwt.sign(payload, jwtSecret, options);
 }
 

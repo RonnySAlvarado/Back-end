@@ -11,9 +11,11 @@ exports.up = function(knex, Promise) {
       .inTable('parents')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
+    tbl.string('gigapetName', 255)
+      .notNullable();
   })
 };
 
 exports.down = function(knex, Promise) {
-  return knex.scema.dropTableIfExists('children');
+  return knex.schema.dropTableIfExists('children');
 };
