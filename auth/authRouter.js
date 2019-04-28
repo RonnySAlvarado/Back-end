@@ -7,46 +7,22 @@ const Parents = require('../parents/parentsModel');
 
 const jwtSecret = process.env.JWT_SECRET;
 
-router.post('/register', (req, res) => {
-  const parent = req.body;
-  const hash = bcrypt.hashSync(parent.password, 16);
+router.post('/register', async (req, res) => {
+  let parent = req.body;
+  const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
-  db('parents')
-    .insert(parent)
-    .then(ids => {
-      const id = ids[0];
-      console.log(id)
-      db('parents')
-        .where({ id })
-        .then(user => {
-          const token = generateToken(user);
-          console.log(token)
-          res.status(201).json({ username: user[0].username, token });
-        })
-        .catch(err =>
-          res.status(500).json({ message: "error adding new user", err })
-        );
-    })
-    .catch(err => {
-      res.status(500).json({ message: "server error", err });
-    });
-})
-// router.post('/register', async (req, res) => {
-//   let parent = req.body;
-//   const hash = bcrypt.hashSync(parent.password, 10);
-//   parent.password = hash;
-//   try {
-//     parent = await db('parents').insert(parent)
-//     console.log(parent)
-//     const token = await generateToken(parent);
-//     // const { id, username } = parent
-//     console.log('token', token)
-//     res.status(201).json({message: `Welcome, ${parent.username}!`, token});
-//   } catch (err) {
-//     res.status(500).json({error: err})
-//   }
+  try {
+    parent = await db('parents').insert(parent)
+    console.log(parent)
+    const token = await generateToken(parent);
+    // const { id, username } = parent
+    console.log('token', token)
+    res.status(201).json({message: `Welcome, ${parent.username}!`, token});
+  } catch (err) {
+    res.status(500).json({error: err})
+  }
 
-// })
+})
 
 
 router.post('/login', async (req, res) => {
