@@ -15,8 +15,7 @@ router.post('/register', async (req, res) => {
   try {
     const id = await Parents.insert(parent);
     // id = id[0];
-    // parent = await Parents.getById(parent.id)
-
+    console.log('id', id[0])
     console.log('parent', parent)
     const token = await generateToken(parent);
     // const { id, username } = parent
