@@ -22,12 +22,14 @@ function getByChild(childId) {
 }
 
 async function insert(foodEntry) {
-  const [id] = await db('foodEntries').insert(foodEntry);
-  return db('foodEntries').where({id}).first();
+  return db('foodEntries')
+    .returning('id')
+    .insert(foodEntry);
 }
 
 async function editEntry(id, foodEntry) {
-  return db('foodEntries').where({id}).update(foodEntry);
+  // return db('foodEntries').where({id}).update(foodEntry);
+  return null;
 }
 
 async function remove(id) {
