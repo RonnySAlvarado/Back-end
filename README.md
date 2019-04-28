@@ -1,9 +1,10 @@
 # Back-end
 
 ## How to use this API
-To run locally: use `npm start` 
+To run locally: use `npm start` or `yarn start`
+Server will run on port 5000
 
-The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokuapp.com/)
+NOT YET WORKING - The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokuapp.com/)
 
 ### Endpoints
 
