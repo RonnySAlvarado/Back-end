@@ -45,7 +45,7 @@ router.get('/:id',   async (req, res) => {
 // })
 
 // get all parent's children
-router.get('/:id/children',   async (req, res) => {
+router.get('/:id/children', restricted, async (req, res) => {
   try {
     const { id } = req.params; 
     const allChildren = await Children.getByParent(id);
@@ -56,7 +56,7 @@ router.get('/:id/children',   async (req, res) => {
 });
 
 // add new children
-router.post('/:id/children',   async (req, res) => {
+router.post('/:id/children', restricted, async (req, res) => {
   try {
     const newChild = req.body;
     const child = await Children.insert(newChild);
