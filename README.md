@@ -50,6 +50,7 @@ The response will return the child's id, name, and parentId.
 `POST` to `/api/foods`
 The request body requires a name and numerical value on a scale of `-5` to `5`. 
 A `5` represents a very healthy food item and `-5` represents more of a treat.
+Response will return the new food id.
 ```
 {
     "name": "apple",
@@ -63,6 +64,7 @@ A `5` represents a very healthy food item and `-5` represents more of a treat.
 ### Add a food entry
 `POST` to `/api/foodentries`
 The request body requires a childId, foodId, and entry date. The date is not auto completed to allow flexibility for users to edit past food entries.
+Response will return the food entry id.
 ```
 {
   "childId": 1,
