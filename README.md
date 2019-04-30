@@ -4,7 +4,7 @@
 To run locally: use `npm start` or `yarn start`
 Server will run on port 5000
 
-NOT YET WORKING - The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokuapp.com/)
+The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokuapp.com/)
 
 ### Endpoints
 
@@ -54,7 +54,8 @@ Response will return the new food id.
 ```
 {
     "name": "apple",
-    "value": 5
+    "value": 5,
+    "categoryId": 1
 }
 ```
 
@@ -69,7 +70,7 @@ Response will return the food entry id.
 {
   "childId": 1,
   "foodId": 1,
-	"date": "04-27-2019"
+	"date": "2019-04-24"
 }
 ```
 

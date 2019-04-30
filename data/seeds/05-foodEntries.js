@@ -7,39 +7,39 @@ exports.seed = function(knex, Promise) {
       return knex('foodEntries').insert([
         {
           id: 1, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 1,
           foodId: 1
         },
         {
           id: 2, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 2,
           foodId: 2
         },
         {
           id: 3, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 3,
           foodId: 3
         },
         {
           id: 4, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 1,
-          foodId: 4
+          foodId: 3
         },
         {
           id: 5, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 2,
-          foodId: 5
+          foodId: 2
         },
         {
           id: 6, 
-          date: 2019-04-24,
+          date: "2019-04-24",
           childId: 3,
-          foodId: 6
+          foodId: 1
         }
       ]);
     });

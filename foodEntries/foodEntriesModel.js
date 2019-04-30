@@ -18,7 +18,9 @@ function getById(id) {
 }
 
 function getByChild(childId) {
-  return db('foodEntries').where({childId});
+  // return db('foodEntries').where({childId});
+  return db('foodEntries').where({childId}).join('foods', 'foodEntries.foodId', '=', 'foods.id')
+  .join('categories', 'foods.id', '=', 'categories.id');
 }
 
 async function insert(foodEntry) {
