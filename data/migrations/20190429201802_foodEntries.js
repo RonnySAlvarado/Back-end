@@ -1,9 +1,10 @@
-
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('foodEntries', tbl => {
     tbl.increments();
-    tbl.timestamp('created_at')
-      .defaultTo(knex.fn.now())
+    // tbl.timestamp('created_at')
+    //   .defaultTo(knex.fn.now())
+    tbl.date('date')
+      .notNullable();
     tbl.integer('childId')
       .notNullable()
       .unsigned()

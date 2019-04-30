@@ -16,8 +16,9 @@ function getById(id) {
 }
 
 async function insert(food) {
-  const [id] = await db('foods').insert(food);
-  return db('foods').where({id}).first();
+  return db('foods')
+    .returning('id')
+    .insert(food);
 }
 
 async function remove(id) {
