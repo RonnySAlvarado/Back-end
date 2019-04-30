@@ -6,7 +6,7 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('children').insert([
         {id: 1, name: 'Ludwig', parentId: '1', gigapetName: 'Panda Dan'},
-        {id: 2, name: 'Beulah', parentId: '2', gigapetName: 'Monster George'},
+        {id: 2, name: 'Beulah', parentId: '1', gigapetName: 'Monster George'},
         {id: 3, name: 'Samwell', parentId: '1', gigapetName: 'Elephant Ellen'}
       ]);
     });

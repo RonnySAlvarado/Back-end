@@ -1,11 +1,11 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('parents').del()
+  return knex('foods').del()
     .then(function () {
       // Inserts seed entries
-      return knex('parents').insert([
-        {id: 1, username: 'bob', password: 'pass123'},
+      return knex('foods').insert([
+        {id: 1, name: 'apple', value: 5, 'categoryId': 1},
       ]);
     });
 };

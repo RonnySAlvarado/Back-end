@@ -1,15 +1,13 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('foods', tbl => {
+  return knex.schema.createTable('categories', tbl => {
     tbl.increments();
     tbl.string('name', 255)
       .notNullable()
       .unique();
-    tbl.integer('value')
-      .notNullable();
   })
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists('foods');
+  return knex.schema.dropTableIfExists('categories');
 };
