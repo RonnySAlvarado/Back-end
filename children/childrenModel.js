@@ -6,6 +6,7 @@ module.exports = {
   // remove,
   getById,
   getByParent,
+  getFoodEntries,
 }
 
 function getAll() {
@@ -23,4 +24,9 @@ function getByParent(parentId) {
 async function insert(child) {
   const [id] = await db('children').insert(child);
   return db('children').where({id}).first();
+}
+
+function getFoodEntries(id) {
+  return db('children').where({id}).join('foodEntries')
+    // .join('foodEntries')
 }

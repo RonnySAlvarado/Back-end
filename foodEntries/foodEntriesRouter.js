@@ -2,7 +2,7 @@ const router = require('express').Router();
 const FoodEntries = require('./foodEntriesModel');
 const restricted = require('../auth/restricted-middleware');
 
-// retrieve all child's food entries
+// retrieve all food entries
 router.get('/', restricted, async (req, res) => {
   try {
     const allFoodEntries = await FoodEntries.getAll();
