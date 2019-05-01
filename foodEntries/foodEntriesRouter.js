@@ -25,16 +25,45 @@ router.post('/', restricted, async (req, res) => {
   }
 })
 
-// retrieve all child's food entries
+// retrieve single food entry by id
 router.get('/:id', restricted, async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id)
-    const allFoodEntries = await FoodEntries.getByChild(id);
-    res.status(200).json(allFoodEntries);
+    const foodEntries = await FoodEntries.getById(id);
+    res.status(200).json(foodEntries);
   } catch (error) {
-    res.status(500).json({error: 'error retrieving food entries', error});
+    res.status(500).json({error: 'error retrieving food entry', error});
   }
 });
 
+// delete specified food entry
+router.delete('/:id', restricted, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const entry = await FoodEntries.removeEntry(id);
+    if (entry > 0) {
+      res.status(204).json({message: 'entry deleted'});
+    } else {
+      res.status(404).json({message: 'Food entry with specified ID does not exist.'});
+    }
+  } catch (error) {
+    res.status(500).json({ error: "The food entry could not be removed", error })
+  }
+})
+
+// edit food entry
+router.put('/:id', restricted, async (req, res) => {
+  try {
+    const {id} = req.params;
+    const entry = req.body;
+    const edited = await FoodEntries.editEntry(id, entry)
+    if (entry.id && entry.childId && entry.foodId && entry.date) {
+      res.status(200).json({edited})
+    } else {
+      res.status(404).json({message: "id, childId, foodId, and date required"})
+    }
+  } catch (error) {
+    res.status(500).json({error: 'unable to edit food entry', error})
+  }
+})
 module.exports = router;

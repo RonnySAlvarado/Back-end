@@ -14,8 +14,8 @@ The deployed API can be found here: [Gigapet API](https://gigapets-pt-bw.herokua
 The request body requires a username and password: 
 ```
 {
-  username: 'bob', 
-  password: 'pass123'
+  "username": "bob", 
+  "password": "pass123"
 }
 ```
 The response will return the user's id and generate a token
@@ -25,8 +25,8 @@ The response will return the user's id and generate a token
 The request body requires a username and password:
 ```
 {
-  username: 'bob', 
-  password: 'pass123'
+  "username": "bob", 
+  "password": "pass123"
 }
 ``` 
 The response will return the user's id and generate a token
@@ -78,5 +78,5 @@ Response will return the food entry id.
 ```
 
 #### Get a full list of a child's food entries
-`GET` to `/api/foodentries/:id`
+`GET` to `/api/children/:id/entries`
 The id needed for this endpoint will be the child's id.
