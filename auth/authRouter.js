@@ -9,17 +9,17 @@ const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   let parent = req.body;
-  console.log(parent)
+  // console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
     const id = await Parents.insert(parent);
     // id = id[0];
-    console.log('id', id[0])
-    console.log('parent', parent)
+    // console.log('id', id[0])
+    // console.log('parent', parent)
     const token = await generateToken(parent);
     // const { id, username } = parent
-    console.log('token', token)
+    // console.log('token', token)
     res.status(201).json({message: `Welcome, ${parent.username}!`, token});
   } catch (err) {
     res.status(500).json({error: 'unable to add new user', err})
@@ -32,8 +32,8 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;    
     const parent = await Parents.getAll().where({ username }).first();
-    console.log(parent, bcrypt.compareSync(password, parent.password))
-    console.log(password === parent.password)
+    // console.log(parent, bcrypt.compareSync(password, parent.password))
+    // console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {
       const token = generateToken(parent);
       const {id, username} = parent;
@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
-  console.log('generateToken parent', parent)
+  // console.log('generateToken parent', parent)
   const payload = {
     // subject: parent.id,
     username: parent.username
@@ -57,7 +57,7 @@ function generateToken(parent) {
   const options = {
     expiresIn: '1d'
   }
-  console.log('payload', payload, 'options', options)
+  // console.log('payload', payload, 'options', options)
   return jwt.sign(payload, jwtSecret, options);
 }
 

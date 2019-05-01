@@ -1,6 +1,6 @@
 const server = require('./server.js');
 const request = require('supertest');
-const db = require('../data/dbConfig');
+// const db = require('../data/dbConfig');
 
 describe('the server', () => {
 
