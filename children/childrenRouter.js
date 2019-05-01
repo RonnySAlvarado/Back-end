@@ -30,7 +30,7 @@ router.get('/:id', restricted, async (req, res) => {
 router.get('/:id/entries', restricted, async (req, res) => {
   try {
     const { id } = req.params;
-    const foodEntries = await Children.getFoodEntries(id);
+    const foodEntries = await FoodEntries.getByChild(id);
     res.status(200).json(foodEntries)
   } catch (error) {
     res.status(500).json({error: "error retrieving food entries", error})

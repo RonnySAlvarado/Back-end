@@ -3,11 +3,11 @@ const db = require('../data/dbConfig.js');
 module.exports = {
   getAll, 
   insert,
-  remove,
+  removeEntry,
   getById,
   getByChild,
   editEntry,
-}
+  }
 
 function getAll() {
   return db('foodEntries');
@@ -21,7 +21,7 @@ function getByChild(childId) {
   // return db('foodEntries').where({childId});
   return db('foodEntries').where({childId}).join('foods', 'foodEntries.foodId', '=', 'foods.id')
   .join('categories', 'foods.id', '=', 'categories.id')
-  .select('foodEntries.date as entryDate', 'foodEntries.childId', 'categories.id as categoryId', 'categories.name as categoryName',  'foods.id as foodId', 'foods.name as foodName', 'foods.value as foodValue');
+  .select('foodEntries.id as foodEntryId','foodEntries.date as entryDate', 'foodEntries.childId', 'categories.id as categoryId', 'categories.name as categoryName',  'foods.id as foodId', 'foods.name as foodName', 'foods.value as foodValue');
 }
 
 async function insert(foodEntry) {
@@ -30,11 +30,11 @@ async function insert(foodEntry) {
     .insert(foodEntry);
 }
 
-async function editEntry(id, foodEntry) {
-  // return db('foodEntries').where({id}).update(foodEntry);
-  return null;
+async function editEntry(id, editedEntry) {
+    await db('foodEntries').where({ id }).update(editedEntry);
+    return db('foodEntries').where({ id }).first();
 }
 
-async function remove(id) {
+function removeEntry(id) {
   return db('foodEntries').where('id', id).del();
 }
