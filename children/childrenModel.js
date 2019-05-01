@@ -22,7 +22,7 @@ function getByParent(parentId) {
 }
 
 async function insert(child) {
-  const [id] = await db('children').insert(child);
+  const [id] = await db('children').returning('id').insert(child);
   return db('children').where({id}).first();
 }
 
