@@ -20,7 +20,8 @@ function getById(id) {
 function getByChild(childId) {
   // return db('foodEntries').where({childId});
   return db('foodEntries').where({childId}).join('foods', 'foodEntries.foodId', '=', 'foods.id')
-  .join('categories', 'foods.id', '=', 'categories.id');
+  .join('categories', 'foods.id', '=', 'categories.id')
+  .select('foodEntries.date as entryDate', 'foodEntries.childId', 'categories.id as categoryId', 'categories.name as categoryName',  'foods.id as foodId', 'foods.name as foodName', 'foods.value as foodValue');
 }
 
 async function insert(foodEntry) {
