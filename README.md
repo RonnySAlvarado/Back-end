@@ -80,3 +80,31 @@ Response will return the food entry id.
 #### Get a full list of a child's food entries
 `GET` to `/api/children/:id/entries`
 The id needed for this endpoint will be the child's id.
+
+#### Edit food entry
+`PUT` to `/api/foodentries/:id`
+The id needed for this endpoint will be the food entry id. 
+Request body will require the following: 
+```
+{
+  "id": 1,
+  "date": "2019-05-01",
+  "childId": 3,
+  "foodId": 1
+}
+```
+Response will return the edited entry object:
+```
+{
+  "edited": {
+    "id": 1,
+    "date": "2019-05-01T00:00:00.000Z",
+    "childId": 3,
+    "foodId": 2
+  }
+}
+```
+
+#### Delete food entry
+`DELETE` to `/api/foodentries/:id`
+The id needed for this endpoint will be the entry id.
