@@ -9,13 +9,17 @@ const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   let parent = req.body;
-  // console.log(parent)
+  console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
     const [id] = await Parents.insert(parent);
-    const token = await generateToken(parent);
-    res.status(201).json({id, token});
+    if (id > 0) {
+      const token = await generateToken(parent);
+      res.status(201).json({id, token});
+    } else {
+      res.status(400).json({message: 'username and password required'})
+    }
   } catch (err) {
     res.status(500).json({error: 'unable to add new user', err})
   }
