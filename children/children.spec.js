@@ -24,6 +24,7 @@ describe('the children router', () => {
     }
     describe('insert new user', () => {
       beforeEach(() => {
+        // db('children').truncate();
         return db('children').truncate();
       })
   
