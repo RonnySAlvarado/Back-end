@@ -9,7 +9,6 @@ const jwtSecret = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
   let parent = req.body;
-  console.log(parent)
   const hash = bcrypt.hashSync(parent.password, 10);
   parent.password = hash;
   try {
@@ -29,8 +28,6 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;    
     const parent = await Parents.getAll().where({ username }).first();
-    // console.log(parent, bcrypt.compareSync(password, parent.password))
-    // console.log(password === parent.password)
     if (parent && bcrypt.compareSync(password, parent.password)) {
       const token = generateToken(parent);
       const {id, username} = parent;
@@ -45,16 +42,14 @@ router.post('/login', async (req, res) => {
 })
 
 function generateToken(parent) {
-  // console.log('generateToken parent', parent)
   const payload = {
-    // subject: parent.id,
     username: parent.username
   }
 
   const options = {
     expiresIn: '1d'
   }
-  // console.log('payload', payload, 'options', options)
+  
   return jwt.sign(payload, jwtSecret, options);
 }
 

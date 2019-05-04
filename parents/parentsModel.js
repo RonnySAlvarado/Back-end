@@ -3,7 +3,6 @@ const db = require('../data/dbConfig.js');
 module.exports = {
   getAll, 
   insert,
-  // remove,
   getById,
 }
 
@@ -16,12 +15,6 @@ function getById(id) {
 }
 
 async function insert(parent) {
-  // const [id] = await db('parents').insert(parent);
-  // return db('parents').where({id}).first();
-  // const id = await db('parents')
-  // // .returning('id')
-  // .insert(parent, ['id']);
-  // return id[0];
   return db('parents')
     .returning('id')
     .insert(parent);
