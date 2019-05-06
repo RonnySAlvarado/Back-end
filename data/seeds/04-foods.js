@@ -16,7 +16,7 @@ exports.seed = function(knex, Promise) {
         {id: 9, name: 'kiwi', value: 1, 'categoryId': 1},
         {id: 10, name: 'strawberry', value: 1, 'categoryId': 1},
         {id: 11, name: 'orange', value: 1, 'categoryId': 1},
-        {id: 12, name: 'mango', value: 1, 'categoryId': 1},
+        {id: 12, name: 'mango', value: 1, 'categoryId': 1}, 
         {id: 13, name: 'steak', value: 1, 'categoryId': 4},
         {id: 14, name: 'pork', value: 1, 'categoryId': 4},
         {id: 15, name: 'turkey', value: 1, 'categoryId': 4},
